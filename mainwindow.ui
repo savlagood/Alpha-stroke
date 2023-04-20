@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1047</width>
-    <height>442</height>
+    <width>950</width>
+    <height>685</height>
    </rect>
   </property>
   <property name="font">
@@ -46,7 +46,7 @@
      <string>Создать набор точек</string>
     </property>
    </widget>
-   <widget class="QSplitter" name="splitter_2">
+   <widget class="QSplitter" name="splitter_3">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -116,7 +116,7 @@ QPushButton:pressed {
      <string>Построить график</string>
     </property>
    </widget>
-   <widget class="QSplitter" name="splitter_3">
+   <widget class="QSplitter" name="splitter_1">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -149,7 +149,7 @@ border-bottom: 1px solid #ef3124;</string>
      </property>
     </widget>
    </widget>
-   <widget class="QSplitter" name="splitter">
+   <widget class="QSplitter" name="splitter_2">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -206,7 +206,7 @@ border-bottom: 1px solid #ef3124;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>207</y>
+      <y>227</y>
       <width>131</width>
       <height>29</height>
      </rect>
@@ -243,7 +243,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>177</y>
+      <y>197</y>
       <width>181</width>
       <height>20</height>
      </rect>
@@ -263,7 +263,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>214</y>
+      <y>234</y>
       <width>151</width>
       <height>22</height>
      </rect>
@@ -287,7 +287,7 @@ border-bottom: 1px solid #ef3124;</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>310</y>
+      <y>330</y>
       <width>91</width>
       <height>23</height>
      </rect>
@@ -300,7 +300,7 @@ border-bottom: 1px solid #ef3124;</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>280</y>
+      <y>300</y>
       <width>91</width>
       <height>23</height>
      </rect>
@@ -313,7 +313,7 @@ border-bottom: 1px solid #ef3124;</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>250</y>
+      <y>270</y>
       <width>91</width>
       <height>23</height>
      </rect>
@@ -326,7 +326,7 @@ border-bottom: 1px solid #ef3124;</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>340</y>
+      <y>360</y>
       <width>91</width>
       <height>23</height>
      </rect>
@@ -339,7 +339,7 @@ border-bottom: 1px solid #ef3124;</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>370</y>
+      <y>390</y>
       <width>91</width>
       <height>23</height>
      </rect>
@@ -352,7 +352,7 @@ border-bottom: 1px solid #ef3124;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>400</y>
+      <y>420</y>
       <width>291</width>
       <height>29</height>
      </rect>
@@ -389,7 +389,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>250</y>
+      <y>270</y>
       <width>231</width>
       <height>26</height>
      </rect>
@@ -405,7 +405,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>280</y>
+      <y>300</y>
       <width>221</width>
       <height>26</height>
      </rect>
@@ -418,7 +418,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>310</y>
+      <y>330</y>
       <width>211</width>
       <height>26</height>
      </rect>
@@ -431,7 +431,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>340</y>
+      <y>360</y>
       <width>161</width>
       <height>26</height>
      </rect>
@@ -447,7 +447,7 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>370</y>
+      <y>390</y>
       <width>161</width>
       <height>26</height>
      </rect>
@@ -460,19 +460,19 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>40</y>
-      <width>350</width>
-      <height>350</height>
+      <y>30</y>
+      <width>300</width>
+      <height>300</height>
      </rect>
     </property>
    </widget>
    <widget class="QCustomPlot" name="primitive_graph" native="true">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>40</y>
-      <width>350</width>
-      <height>350</height>
+      <x>640</x>
+      <y>30</y>
+      <width>300</width>
+      <height>300</height>
      </rect>
     </property>
    </widget>
@@ -513,20 +513,120 @@ QPushButton:pressed {
      <string>Сохранить точки</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>10</y>
+      <width>301</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>10</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Исходная функция</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>10</y>
+      <width>301</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>10</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Первообразная</string>
+    </property>
+   </widget>
+   <widget class="QCustomPlot" name="deriv_source_graph" native="true">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>370</y>
+      <width>300</width>
+      <height>300</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>350</y>
+      <width>301</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>10</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Производная исходной функции</string>
+    </property>
+   </widget>
+   <widget class="QCustomPlot" name="deriv_primitive_graph" native="true">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>370</y>
+      <width>300</width>
+      <height>300</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>350</y>
+      <width>301</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>10</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Производная первообразной</string>
+    </property>
+   </widget>
    <widget class="QPushButton" name="scale_source">
     <property name="geometry">
      <rect>
       <x>510</x>
-      <y>400</y>
-      <width>161</width>
-      <height>29</height>
+      <y>10</y>
+      <width>111</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>13</family>
-      <pointsize>9</pointsize>
-      <italic>false</italic>
+      <pointsize>8</pointsize>
+      <italic>true</italic>
       <bold>false</bold>
      </font>
     </property>
@@ -534,17 +634,8 @@ QPushButton:pressed {
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {
-background-color: #ef3124;
-color: #ffffff;
-border: none;
-font: Roboto bold;
-}
-QPushButton:pressed {
-	border: 1px solid #ef3124;
-	color: #ef3124;
-   	background-color: #ffffff;
-}</string>
+     <string notr="true">color: #ef3124;
+border: none;</string>
     </property>
     <property name="text">
      <string>Сбросить масштаб</string>
@@ -553,17 +644,17 @@ QPushButton:pressed {
    <widget class="QPushButton" name="scale_primitive">
     <property name="geometry">
      <rect>
-      <x>870</x>
-      <y>400</y>
-      <width>161</width>
-      <height>29</height>
+      <x>880</x>
+      <y>10</y>
+      <width>61</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>13</family>
-      <pointsize>9</pointsize>
-      <italic>false</italic>
+      <pointsize>8</pointsize>
+      <italic>true</italic>
       <bold>false</bold>
      </font>
     </property>
@@ -571,60 +662,67 @@ QPushButton:pressed {
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">QPushButton {
-background-color: #ef3124;
-color: #ffffff;
-border: none;
-font: Roboto bold;
-}
-QPushButton:pressed {
-	border: 1px solid #ef3124;
-	color: #ef3124;
-   	background-color: #ffffff;
-}</string>
+     <string notr="true">color: #ef3124;
+border: none;</string>
     </property>
     <property name="text">
-     <string>Сбросить масштаб</string>
+     <string>Сбросить</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QPushButton" name="scale_deriv_primit">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>10</y>
-      <width>351</width>
-      <height>20</height>
+      <x>880</x>
+      <y>350</y>
+      <width>61</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Arial</family>
-      <pointsize>10</pointsize>
-      <bold>true</bold>
+      <family>13</family>
+      <pointsize>8</pointsize>
+      <italic>true</italic>
+      <bold>false</bold>
      </font>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #ef3124;
+border: none;</string>
+    </property>
     <property name="text">
-     <string>График исходной функции</string>
+     <string>Сбросить</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
+   <widget class="QPushButton" name="scale_deriv_source">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>10</y>
-      <width>351</width>
-      <height>20</height>
+      <x>560</x>
+      <y>350</y>
+      <width>61</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Arial</family>
-      <pointsize>10</pointsize>
-      <bold>true</bold>
+      <family>13</family>
+      <pointsize>8</pointsize>
+      <italic>true</italic>
+      <bold>false</bold>
      </font>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #ef3124;
+border: none;</string>
+    </property>
     <property name="text">
-     <string>График первообразной</string>
+     <string>Сбросить</string>
     </property>
    </widget>
   </widget>
@@ -637,6 +735,29 @@ QPushButton:pressed {
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>function</tabstop>
+  <tabstop>begin</tabstop>
+  <tabstop>end</tabstop>
+  <tabstop>dist</tabstop>
+  <tabstop>gen_dots_but</tabstop>
+  <tabstop>gen_dots_but_2</tabstop>
+  <tabstop>upload_dots</tabstop>
+  <tabstop>avg_rec_but</tabstop>
+  <tabstop>right_rec_but</tabstop>
+  <tabstop>left_rec_but</tabstop>
+  <tabstop>trap_but</tabstop>
+  <tabstop>simpson_but</tabstop>
+  <tabstop>download_dots</tabstop>
+  <tabstop>scale_source</tabstop>
+  <tabstop>scale_primitive</tabstop>
+  <tabstop>scale_deriv_source</tabstop>
+  <tabstop>scale_deriv_primit</tabstop>
+  <tabstop>end_2</tabstop>
+  <tabstop>dist_2</tabstop>
+  <tabstop>begin_2</tabstop>
+  <tabstop>function_2</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

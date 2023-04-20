@@ -22,14 +22,14 @@ private slots:
 
     void on_upload_dots_clicked();
     void on_download_dots_clicked();
-
     void on_gen_dots_but_clicked();
-
     void on_gen_dots_but_2_clicked();
 
     void on_scale_source_clicked();
-
     void on_scale_primitive_clicked();
+
+    void on_scale_deriv_source_clicked();
+    void on_scale_deriv_primit_clicked();
 
 private:
     void draw_source_graph();
@@ -41,13 +41,16 @@ private:
     void trap_rec_method();
     void simpson_rec_method();
 
+    void draw_deriv_source_graph();
+    void draw_deriv_primitive_graph();
+
     void process_dots();
 
 
     Ui::MainWindow *ui;
 
     double d, x_begin = 0.0;
-    int N;
+    int N, rng = 11;
     std::string rpn_func;
 
     QVector<double> inp_x, inp_y;

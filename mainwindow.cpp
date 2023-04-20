@@ -27,16 +27,26 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->trap_but, SIGNAL(clicked()), this, SLOT(select_method()));
     connect(ui->simpson_but, SIGNAL(clicked()), this, SLOT(select_method()));
 
-    ui->source_graph->xAxis->setRange(-8, 8);
-    ui->source_graph->yAxis->setRange(-8, 8);
-    ui->primitive_graph->xAxis->setRange(-8, 8);
-    ui->primitive_graph->yAxis->setRange(-8, 8);
+    ui->source_graph->xAxis->setRange(-rng, rng);
+    ui->source_graph->yAxis->setRange(-rng, rng);
+    ui->primitive_graph->xAxis->setRange(-rng, rng);
+    ui->primitive_graph->yAxis->setRange(-rng, rng);
+    ui->deriv_source_graph->xAxis->setRange(-rng, rng);
+    ui->deriv_source_graph->yAxis->setRange(-rng, rng);
+    ui->deriv_primitive_graph->xAxis->setRange(-rng, rng);
+    ui->deriv_primitive_graph->yAxis->setRange(-rng, rng);
 
     ui->source_graph->setInteraction(QCP::iRangeZoom, true);
     ui->source_graph->setInteraction(QCP::iRangeDrag, true);
 
     ui->primitive_graph->setInteraction(QCP::iRangeZoom, true);
     ui->primitive_graph->setInteraction(QCP::iRangeDrag, true);
+
+    ui->deriv_source_graph->setInteraction(QCP::iRangeZoom, true);
+    ui->deriv_source_graph->setInteraction(QCP::iRangeDrag, true);
+
+    ui->deriv_primitive_graph->setInteraction(QCP::iRangeZoom, true);
+    ui->deriv_primitive_graph->setInteraction(QCP::iRangeDrag, true);
 }
 
 MainWindow::~MainWindow()
@@ -146,6 +156,8 @@ void MainWindow::simpson_rec_method() {
 
 
 void MainWindow::draw_source_graph() {
+    ui->source_graph->clearGraphs();
+
     ui->source_graph->addGraph();
     ui->source_graph->graph(0)->setPen(QPen(Qt::red));
     ui->source_graph->graph(0)->setData(inp_x, inp_y);
@@ -202,9 +214,32 @@ void MainWindow::draw_primitive_graph() {
 }
 
 
+void MainWindow::draw_deriv_source_graph() {
+    ui->deriv_source_graph->clearGraphs();
+
+    ui->deriv_source_graph->addGraph();
+    ui->deriv_source_graph->graph(0)->setPen(QPen(Qt::red));
+    ui->deriv_source_graph->graph(0)->setData(inp_x, inp_y);
+
+    ui->deriv_source_graph->replot();
+}
+
+
+void MainWindow::draw_deriv_primitive_graph() {
+    ui->deriv_primitive_graph->clearGraphs();
+
+    ui->deriv_primitive_graph->addGraph();
+    ui->deriv_primitive_graph->graph(0)->setPen(QPen(Qt::red));
+    ui->deriv_primitive_graph->graph(0)->setData(inp_x, inp_y);
+
+    ui->deriv_primitive_graph->replot();
+}
+
+
 void MainWindow::process_dots() {
-    ui->source_graph->clearGraphs();
     draw_source_graph();
+    draw_deriv_source_graph();
+    draw_deriv_primitive_graph();
 
 //    cout << "avg\n";
     avg_rec_method();
@@ -218,7 +253,6 @@ void MainWindow::process_dots() {
     simpson_rec_method();
 
 //    cout << "graph\n";
-    ui->primitive_graph->clearGraphs();
     draw_primitive_graph();
 }
 
@@ -392,16 +426,32 @@ void MainWindow::on_gen_dots_but_2_clicked()
 
 void MainWindow::on_scale_source_clicked()
 {
-    ui->source_graph->xAxis->setRange(-8, 8);
-    ui->source_graph->yAxis->setRange(-8, 8);
+    ui->source_graph->xAxis->setRange(-rng, rng);
+    ui->source_graph->yAxis->setRange(-rng, rng);
     ui->source_graph->replot();
 }
 
 
 void MainWindow::on_scale_primitive_clicked()
 {
-    ui->primitive_graph->xAxis->setRange(-8, 8);
-    ui->primitive_graph->yAxis->setRange(-8, 8);
+    ui->primitive_graph->xAxis->setRange(-rng, rng);
+    ui->primitive_graph->yAxis->setRange(-rng, rng);
     ui->primitive_graph->replot();
+}
+
+
+void MainWindow::on_scale_deriv_source_clicked()
+{
+    ui->deriv_source_graph->xAxis->setRange(-rng, rng);
+    ui->deriv_source_graph->yAxis->setRange(-rng, rng);
+    ui->deriv_source_graph->replot();
+}
+
+
+void MainWindow::on_scale_deriv_primit_clicked()
+{
+    ui->deriv_primitive_graph->xAxis->setRange(-rng, rng);
+    ui->deriv_primitive_graph->yAxis->setRange(-rng, rng);
+    ui->deriv_primitive_graph->replot();
 }
 
