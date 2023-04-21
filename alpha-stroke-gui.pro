@@ -9,14 +9,17 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    derive_integrate.cpp \
+    func_calculus.cpp \
     main.cpp \
     mainwindow.cpp \
     qcustomplot.cpp
 
 HEADERS += \
+    derive_integrate.h \
+    func_calculus.h \
     mainwindow.h \
-    qcustomplot.h \
-    reverse_polish_notation.h
+    qcustomplot.h
 
 FORMS += \
     mainwindow.ui

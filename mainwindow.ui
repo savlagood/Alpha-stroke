@@ -348,7 +348,7 @@ border-bottom: 1px solid #ef3124;</string>
      <string>0.0</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="download_dots">
+   <widget class="QPushButton" name="download_primitive_dots">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -476,7 +476,7 @@ QPushButton:pressed {
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="gen_dots_but_2">
+   <widget class="QPushButton" name="download_source_dots">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -613,7 +613,7 @@ QPushButton:pressed {
      <string>Производная первообразной</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="scale_source">
+   <widget class="QPushButton" name="scale_source_but">
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -641,7 +641,7 @@ border: none;</string>
      <string>Сбросить масштаб</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="scale_primitive">
+   <widget class="QPushButton" name="scale_primitive_but">
     <property name="geometry">
      <rect>
       <x>880</x>
@@ -669,7 +669,7 @@ border: none;</string>
      <string>Сбросить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="scale_deriv_primit">
+   <widget class="QPushButton" name="scale_deriv_primit_but">
     <property name="geometry">
      <rect>
       <x>880</x>
@@ -697,7 +697,7 @@ border: none;</string>
      <string>Сбросить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="scale_deriv_source">
+   <widget class="QPushButton" name="scale_deriv_source_but">
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -741,22 +741,18 @@ border: none;</string>
   <tabstop>end</tabstop>
   <tabstop>dist</tabstop>
   <tabstop>gen_dots_but</tabstop>
-  <tabstop>gen_dots_but_2</tabstop>
+  <tabstop>download_source_dots</tabstop>
   <tabstop>upload_dots</tabstop>
   <tabstop>avg_rec_but</tabstop>
   <tabstop>right_rec_but</tabstop>
   <tabstop>left_rec_but</tabstop>
   <tabstop>trap_but</tabstop>
   <tabstop>simpson_but</tabstop>
-  <tabstop>download_dots</tabstop>
-  <tabstop>scale_source</tabstop>
-  <tabstop>scale_primitive</tabstop>
-  <tabstop>scale_deriv_source</tabstop>
-  <tabstop>scale_deriv_primit</tabstop>
-  <tabstop>end_2</tabstop>
-  <tabstop>dist_2</tabstop>
-  <tabstop>begin_2</tabstop>
-  <tabstop>function_2</tabstop>
+  <tabstop>download_primitive_dots</tabstop>
+  <tabstop>scale_source_but</tabstop>
+  <tabstop>scale_primitive_but</tabstop>
+  <tabstop>scale_deriv_source_but</tabstop>
+  <tabstop>scale_deriv_primit_but</tabstop>
  </tabstops>
  <resources/>
  <connections/>

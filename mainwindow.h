@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "qcustomplot.h"
+
 #include <QMainWindow>
 #include <QVector>
 #include <string>
@@ -8,6 +10,7 @@
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
 
 class MainWindow : public QMainWindow
 {
@@ -18,33 +21,26 @@ public:
     ~MainWindow();
 
 private slots:
-    void select_method();
+    void rescale_graph(QCustomPlot *graph);
 
     void on_upload_dots_clicked();
-    void on_download_dots_clicked();
+    void on_download_primitive_dots_clicked();
     void on_gen_dots_but_clicked();
-    void on_gen_dots_but_2_clicked();
+    void on_download_source_dots_clicked();
 
-    void on_scale_source_clicked();
-    void on_scale_primitive_clicked();
-
-    void on_scale_deriv_source_clicked();
-    void on_scale_deriv_primit_clicked();
-
-private:
-    void draw_source_graph();
     void draw_primitive_graph();
 
-    void avg_rec_method();
+
+private:
     void left_rec_method();
     void right_rec_method();
     void trap_rec_method();
     void simpson_rec_method();
 
-    void draw_deriv_source_graph();
-    void draw_deriv_primitive_graph();
+    void draw_graph(QCustomPlot *graph, QVector<double> x_data, QVector<double> y_data);
 
     void process_dots();
+    void init_graph(QCustomPlot *graph);
 
 
     Ui::MainWindow *ui;
