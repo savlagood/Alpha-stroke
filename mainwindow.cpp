@@ -10,6 +10,7 @@
 #include <filesystem>
 #include <string>
 #include <cmath>
+#include <iostream>
 
 
 void MainWindow::rescale_graph(QCustomPlot *graph) {
@@ -68,32 +69,44 @@ void MainWindow::draw_graph(QCustomPlot *graph, QVector<double> x_data, QVector<
 
 
 void MainWindow::draw_primitive_graph() {
-    if (ui->avg_rec_but->isChecked())
-        draw_graph(ui->primitive_graph, avg_rec_x, avg_rec_y);
+    if (ui->avg_rec_but->isChecked()) {
+//        draw_graph(ui->primitive_graph, avg_rec_x, avg_rec_y);
+        integral_x = &avg_rec_x;
+        integral_y = &avg_rec_y;
 
-    else if (ui->right_rec_but->isChecked())
-        draw_graph(ui->primitive_graph, right_rec_x, right_rec_y);
+    } else if (ui->right_rec_but->isChecked()) {
+//        draw_graph(ui->primitive_graph, right_rec_x, right_rec_y);
+        integral_x = &right_rec_x;
+        integral_y = &right_rec_y;
 
-    else if (ui->left_rec_but->isChecked())
-        draw_graph(ui->primitive_graph, left_rec_x, left_rec_y);
+    } else if (ui->left_rec_but->isChecked()) {
+//        draw_graph(ui->primitive_graph, left_rec_x, left_rec_y);
+        integral_x = &left_rec_x;
+        integral_y = &left_rec_y;
 
-    else if (ui->trap_but->isChecked())
-        draw_graph(ui->primitive_graph, trap_x, trap_y);
+    } else if (ui->trap_but->isChecked()) {
+//        draw_graph(ui->primitive_graph, trap_x, trap_y);
+        integral_x = &trap_x;
+        integral_y = &trap_y;
 
-    else if (ui->simpson_but->isChecked())
-        draw_graph(ui->primitive_graph, simp_x, simp_y);
+    } else if (ui->simpson_but->isChecked()) {
+//        draw_graph(ui->primitive_graph, simp_x, simp_y);
+        integral_x = &simp_x;
+        integral_y = &simp_y;
 
-    else
+    } else {
         QMessageBox::warning(this,
                              tr("Не выбран метод интегрирования"),
                              tr("Выберите метод интегрирования, только затем можно будет выгрузить точки первообразной."));
+        return;
+    }
+    draw_graph(ui->primitive_graph, *integral_x, *integral_y);
 }
 
 
 void MainWindow::process_dots() {
+//    source graph
     draw_graph(ui->source_graph, inp_x, inp_y);
-    draw_graph(ui->deriv_source_graph, inp_x, inp_y);
-    draw_graph(ui->deriv_primitive_graph, inp_x, inp_y);
 
     integrate_methods::avg_rec_method(inp_y, avg_rec_x, avg_rec_y, x_begin, d);
     ui->avg_rec_val->setText(QString::number(avg_rec_y.last(), 'g', 8));
@@ -110,7 +123,23 @@ void MainWindow::process_dots() {
     integrate_methods::simpson_rec_method(inp_y, simp_x, simp_y, x_begin, d);
     ui->simpson_val->setText(QString::number(simp_y.last(), 'g', 8));
 
+//    primitive graph
     draw_primitive_graph();
+
+//    derivative graph
+    std::cout << "0\n";
+    derivate_methods::derivate(inp_y, deriv_sour_x, deriv_sour_y, x_begin, d);
+    std::cout << "1\n";
+    for (int i = 0; i < 10; i++)
+        std::cout << deriv_prim_x[i] << " " << deriv_prim_y[i] << "\n";
+    std::cout << "2\n";
+    derivate_methods::derivate(*integral_y, deriv_prim_x, deriv_prim_y, x_begin, d);
+    std::cout << "3\n";
+
+    draw_graph(ui->deriv_source_graph, deriv_sour_x, deriv_sour_y);
+    std::cout << "4\n";
+    draw_graph(ui->deriv_primitive_graph, deriv_prim_x, deriv_prim_y);
+    std::cout << "5 \n";
 }
 
 

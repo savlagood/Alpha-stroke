@@ -50,7 +50,8 @@ private:
     std::string rpn_func;
 
     QVector<double> inp_x, inp_y;
-    QVector<double> left_rec_x, right_rec_x, avg_rec_x, trap_x, simp_x;
-    QVector<double> left_rec_y, right_rec_y, avg_rec_y, trap_y, simp_y;
+    QVector<double> left_rec_x, right_rec_x, avg_rec_x, trap_x, simp_x, deriv_sour_x, deriv_prim_x;
+    QVector<double> left_rec_y, right_rec_y, avg_rec_y, trap_y, simp_y, deriv_sour_y, deriv_prim_y;
+    QVector<double> *integral_x, *integral_y;
 };
 #endif // MAINWINDOW_H

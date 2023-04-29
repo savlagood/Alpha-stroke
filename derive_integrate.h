@@ -10,4 +10,9 @@ namespace integrate_methods {
     void simpson_rec_method(QVector<double> inp_y, QVector<double> &out_x, QVector<double> &out_y, double x_begin, double d);
 }
 
+
+namespace derivate_methods {
+    void derivate(QVector<double> inp_y, QVector<double> &out_x, QVector<double> &out_y, double x_begin, double d);
+}
+
 #endif // DERIVE_INTEGRATE_H
