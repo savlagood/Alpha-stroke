@@ -2,6 +2,7 @@
 #include "derive_integrate.h"
 
 namespace integrate_methods {
+//    integral counting
     void avg_rec_method(QVector<double> inp_y, QVector<double> &out_x, QVector<double> &out_y, double x_begin, double d) {
         out_x.clear();
         out_y.clear();
@@ -97,5 +98,22 @@ namespace integrate_methods {
             out_y.push_back(result);
         }
     }
+
+
+//    derivative counting
+//    void derivative(QVector<double> inp_y, QVector<double> &out_x, QVector<double> &out_y, double x_begin, double d) {
+//        out_x.clear();
+//        out_y.clear();
+
+//        out_x.push_back(x_begin + 0);
+//        out_y.push_back(0);
+
+//        double result = 0.0;
+//        int N = inp_y.length();
+//        for (int i = 0; i < (n-1); i++) {
+//            y[i] = ( x[i] + x[i+1] ) / h;
+//            fprintf (stdout, "f'(%lf) = %lf\n", x[i], y[i]);
+//        }
+//    }
 }
 
