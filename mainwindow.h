@@ -31,7 +31,11 @@ private slots:
     void draw_primitive_graph();
 
 
+    void on_download_deriv_dots_clicked();
+
 private:
+    void download_dots(QString out_file_path, QVector<double> out_y);
+
     void left_rec_method();
     void right_rec_method();
     void trap_rec_method();

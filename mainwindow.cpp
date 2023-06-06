@@ -127,19 +127,13 @@ void MainWindow::process_dots() {
     draw_primitive_graph();
 
 //    derivative graph
-    std::cout << "0\n";
     derivate_methods::derivate(inp_y, deriv_sour_x, deriv_sour_y, x_begin, d);
-    std::cout << "1\n";
-    for (int i = 0; i < 10; i++)
-        std::cout << deriv_prim_x[i] << " " << deriv_prim_y[i] << "\n";
-    std::cout << "2\n";
     derivate_methods::derivate(*integral_y, deriv_prim_x, deriv_prim_y, x_begin, d);
-    std::cout << "3\n";
+//    for (int i = 0; i < 10; i++)
+//        std::cout << deriv_prim_x[i] << " " << deriv_prim_y[i] << " " << integral_y->at(i) << " " << integral_y->at(i + 1) << "\n";
 
     draw_graph(ui->deriv_source_graph, deriv_sour_x, deriv_sour_y);
-    std::cout << "4\n";
     draw_graph(ui->deriv_primitive_graph, deriv_prim_x, deriv_prim_y);
-    std::cout << "5 \n";
 }
 
 
@@ -182,11 +176,7 @@ void MainWindow::on_upload_dots_clicked() {
 }
 
 
-void MainWindow::on_download_source_dots_clicked() {
-    string op_file = filesystem::current_path().string() + "\\func_dots.txt";
-    QString out_file_path = QFileDialog::getSaveFileName(this,
-                                                         QString::fromStdString("Сохранить точки исходной функции"),
-                                                         QString::fromStdString(op_file).toLocal8Bit());
+void MainWindow::download_dots(QString out_file_path, QVector<double> out_y) {
     if (out_file_path.isEmpty())
         return;
 
@@ -196,67 +186,46 @@ void MainWindow::on_download_source_dots_clicked() {
         return;
     }
 
-    fout << N << "\n" << d << "\n" << x_begin << "\n";
-    for (int i = 0; i < inp_y.size(); i++) {
-        fout << inp_y[i] << " ";
+    fout << out_y.size() << "\n" << d << "\n" << x_begin << "\n";
+    for (int i = 0; i < out_y.size(); i++) {
+        fout << out_y[i] << " ";
     }
 
     fout.close();
 }
 
 
+void MainWindow::on_download_source_dots_clicked() {
+    if (integral_y->size() == 0) {
+        QMessageBox::warning(this,
+                             tr("Нечего скачивать"),
+                             tr("Похоже вы еще не ввели исходную функцию."));
+        return;
+    }
+
+    string op_file = filesystem::current_path().string() + "\\func_dots.txt";
+    QString out_file_path = QFileDialog::getSaveFileName(this,
+                                                         QString::fromStdString("Сохранить точки исходной функции"),
+                                                         QString::fromStdString(op_file).toLocal8Bit());
+
+    download_dots(out_file_path, inp_y);
+}
+
+
 void MainWindow::on_download_primitive_dots_clicked() {
+    if (integral_y->size() == 0) {
+        QMessageBox::warning(this,
+                             tr("Нечего интегрировать"),
+                             tr("Похоже вы еще не ввели функцию, которую нужно проинтегрировать, или не загрузили ее точки."));
+        return;
+    }
+
     string op_file = filesystem::current_path().string() + "\\primitive_dots.txt";
     QString out_file_path = QFileDialog::getSaveFileName(this,
                                                          QString::fromStdString("Сохранить точки первообразной"),
                                                          QString::fromStdString(op_file).toLocal8Bit());
 
-    if (out_file_path.isEmpty())
-        return;
-
-    ofstream fout(out_file_path.toLocal8Bit());
-    if (!fout) {
-        QMessageBox::warning(this, tr("Ошибка при создании файла"), tr("Невозможно создать файл"));
-        return;
-    }
-
-    if (ui->avg_rec_but->isChecked()) {
-        fout << avg_rec_y.size() << "\n";
-        fout << d << "\n" << x_begin << "\n";
-        for (int i = 0; i < avg_rec_y.size(); i++)
-            fout << avg_rec_y[i] << " ";
-
-    } else if (ui->right_rec_but->isChecked()) {
-        fout << right_rec_y.size() << "\n";
-        fout << d << "\n" << x_begin << "\n";
-        for (int i = 0; i < right_rec_y.size(); i++)
-            fout << right_rec_y[i] << " ";
-
-    } else if (ui->left_rec_but->isChecked()) {
-        fout << left_rec_y.size() << "\n";
-        fout << d << "\n" << x_begin << "\n";
-        for (int i = 0; i < left_rec_y.size(); i++)
-            fout << left_rec_y[i] << " ";
-
-    } else if (ui->trap_but->isChecked()) {
-        fout << trap_y.size() << "\n";
-        fout << d << "\n" << x_begin << "\n";
-        for (int i = 0; i < trap_y.size(); i++)
-            fout << trap_y[i] << " ";
-
-    } else if (ui->simpson_but->isChecked()) {
-        fout << simp_y.size() << "\n";
-        fout << d << "\n" << x_begin << "\n";
-        for (int i = 0; i < simp_y.size(); i++)
-            fout << simp_y[i] << " ";
-
-    } else {
-        QMessageBox::warning(this,
-                             tr("Не выбран метод интегрирования"),
-                             tr("Выберите метод интегрирования, только затем можно будет выгрузить точки первообразной."));
-    }
-
-    fout.close();
+    download_dots(out_file_path, *integral_y);
 }
 
 
@@ -266,7 +235,16 @@ void MainWindow::on_gen_dots_but_clicked() {
         return;
     }
 
-    std::string func = fcalc::mul_correct(ui->function->text().toStdString());
+    std::string func = ui->function->text().toStdString();
+
+    if (!fcalc::is_correct_expression(func)) {
+        QMessageBox::warning(this, tr("Внимание"), tr("Неверно введена функция"));
+        return;
+    }
+
+    func = fcalc::mul_correct(func);
+    func = fcalc::brackets_correct(func);
+
     ui->function->setText(QString::fromStdString(func));
     rpn_func = fcalc::convert_to_rpn(func);
 
@@ -305,5 +283,22 @@ void MainWindow::on_gen_dots_but_clicked() {
     }
 
     process_dots();
+}
+
+
+void MainWindow::on_download_deriv_dots_clicked() {
+    if (integral_y->size() == 0) {
+        QMessageBox::warning(this,
+                             tr("Нечего дифференцировать"),
+                             tr("Похоже вы еще не ввели функцию, производную которой нужно получить, или не загрузили ее точки."));
+        return;
+    }
+
+    string op_file = filesystem::current_path().string() + "\\deriv_func_dots.txt";
+    QString out_file_path = QFileDialog::getSaveFileName(this,
+                                                         QString::fromStdString("Сохранить точки производной от исходной функции"),
+                                                         QString::fromStdString(op_file).toLocal8Bit());
+
+    download_dots(out_file_path, deriv_sour_y);
 }
 

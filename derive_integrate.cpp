@@ -113,7 +113,7 @@ namespace derivate_methods {
 
         double result = 0.0;
         int N = inp_y.length();
-        for (int i = 0; i < (N - 1); i++) {
+        for (int i = 2; i < (N - 3); i++) {
             result = (inp_y[i + 1] - inp_y[i]) / d;
 
             out_x.push_back(x_begin + d*i);

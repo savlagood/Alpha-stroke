@@ -1,7 +1,8 @@
 #include <string>
-#include <regex>
 #include <stack>
 #include <cmath>
+#include <vector>
+#include <sstream>
 
 
 using namespace std;
@@ -10,10 +11,42 @@ using namespace std;
 const double PI = 3.141592653589793238462643383279502884;
 
 namespace fcalc {
+    string replace_all(string str, const string& from, const string& to) {
+        if(from.empty())
+            return str;
+
+        size_t start_pos = 0;
+        while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+            str.replace(start_pos, from.length(), to);
+            start_pos += to.length();
+        }
+
+        return str;
+    }
+
+
+    void replace_funcs(string &str) {
+        str = replace_all(str, " ", "");
+        str = replace_all(str, "(-", "(0-");
+        str = replace_all(str, "(+", "(");
+
+        str = replace_all(str, "pi", "p");
+
+        str = replace_all(str, "sin", "s");
+        str = replace_all(str, "cos", "c");
+        str = replace_all(str, "tan", "t");
+        str = replace_all(str, "tg", "t");
+        str = replace_all(str, "ctg", "f");
+        str = replace_all(str, "ln", "l");
+        str = replace_all(str, "sqrt", "q");
+    }
+
+
     string mul_correct(string str1) {
         int j, kol = 1;
         char a;
-        string str2 = regex_replace(str1, regex(" "), "");;
+
+        string str2 = replace_all(str1, " ", "");
 
         for (int i = 0; str1[i + 1]; i++) {
             if (
@@ -51,20 +84,133 @@ namespace fcalc {
         return str2;
     }
 
-    void replace_funcs(string &str) {
-        str = regex_replace(str, regex(" "), "");
-        str = regex_replace(str, regex("\\(-"), "(0-");
-        str = regex_replace(str, regex("\\(+"), "(");
+    long unsigned int next_char(string s)
+    // Данная функция ищет номер первого вхождения одного
+    // из знаков + - * / в строке.
+    // Если ни один из этих символов не встречается,
+    // например, в строке sinx, то функция возвращает
+    // длину всей строки.
+    {
+        long unsigned int min = size(s);
+        if (min > s.find("+", 0))
+            min = s.find("+", 0);
 
-        str = regex_replace(str, regex("pi"), "p");
+        if (min > s.find("*", 0))
+            min = s.find("*", 0);
 
-        str = regex_replace(str, regex("sin"), "s");
-        str = regex_replace(str, regex("cos"), "c");
-        str = regex_replace(str, regex("tan"), "t");
-        str = regex_replace(str, regex("tg"), "t");
-        str = regex_replace(str, regex("ctg"), "f");
-        str = regex_replace(str, regex("ln"), "l");
-        str = regex_replace(str, regex("sqrt"), "q");
+        if (min > s.find("-", 0))
+            min = s.find("-", 0);
+
+        if (min > s.find("/", 0))
+            min = s.find("/", 0);
+
+        return min;
+    }
+
+
+    string insert_brackets(string s)
+    // Данная функция вставляет скобки, но только в строку,
+    // не содержащую знаков арифметических операций.
+    // Например:
+    // sin15tan6ln23x --> sin(15(tan(61ln(23x))))
+    // но
+    // sinx+cosx --> sin(x+cos(x))
+    {
+        int i = 0;
+        while (s[i] != '\0') {
+            if ((s.substr(i, 3) == "sin" || s.substr(i, 3) == "cos"
+                || s.substr(i, 3) == "tan" || s.substr(i, 3) == "ctg")
+                && !(s.substr(i, 4) == "sin(" || s.substr(i, 4) == "cos("
+                || s.substr(i, 4) == "tan(" || s.substr(i, 4) == "ctg(")) {
+                s.insert(i + 3, "(");
+                s.append(")");
+                }
+
+            if (s.substr(i, 2) == "ln" && !(s.substr(i, 3) == "ln(")) {
+                s.insert(i + 2, "(");
+                s.append(")");
+            }
+
+            if (s.substr(i, 4) == "sqrt" && !(s.substr(i, 5) == "sqrt(")) {
+                s.insert(i + 4, "(");
+                s.append(")");
+            }
+
+            i++;
+        }
+
+        return s;
+    }
+
+
+    string brackets_correct(string s)
+    // как именно оно работает:
+    // sinx --> sin(x)
+    // sinx+cosx*tanx --> sin(x)+cos(x)*tan(x)
+    // sinx+cos15tanlnsqrt12341 --> sin(x)+cos(15tan(ln(sqrt(12341))))
+    // sin(x) + cosx --> sin(x) + cos(x)
+    {
+        string subs, ch, result;
+
+
+        result = "\0"; //сам результат - вначале равен пустой строке
+
+        while (size(s) > 0) { // если >= поставить,
+                              //то возникают некоторые ошибки
+            ch = "\0";
+            subs = s; // подстрока всей строки s
+            ch = s; // знак арифметической операции: + - * /
+
+            subs = subs.erase(next_char(subs));
+            // отрезаем слева от всей входной строки
+            // часть, идущую до первого знака арифметической операции,
+            // т.е. для sinx+cosx+lnx: subs = sinx;
+            // для sinx: subs = sinx;
+            // см. также функцию next_char
+
+            ch = ch.erase(0, next_char(ch));
+            if (ch != "\0")
+                ch = ch.erase(next_char(ch) + 1);
+            // первый знак арифметической операции
+            // sinx+cosx-lnx: ch = +;
+            // sinx: ch = "\0";
+
+            if (size(subs) != 0) {
+                result = result.append(insert_brackets(subs));
+                // обрабатываем подстроку и вставляем в конец result
+                result = result.append(ch);
+                // аналогично, после обработанной подстроки
+                // вставляем знак
+
+                s = s.erase(0, size(subs) + 1); // обрезаем строку
+                // например, sinx+cosx-lnx --> cosx-lnx;
+            }
+            else { // если нет знаков, соответвенно,
+                   // незачем разделять на подстроки,
+                   // т.е. с помощью функции insert_brackets можно
+                   // обработать все сразу
+                result = result.append(insert_brackets(s));
+                break;
+            }
+        }
+
+        return result;
+    }
+
+
+    bool is_correct_expression(string str) {
+        const vector<string> symbols = {
+            "sin", "cos", "ctg", "tg", "ln", "sqrt", ".",
+            "+", "-", "*", "/", "^", "pi", "p", "e", "(", ")",
+            "x", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+        };
+
+        for (size_t i = 0; i < symbols.size(); i++)
+            str = replace_all(str, symbols[i], "");
+
+        if (str.size() > 0)
+            return false;
+        return true;
     }
 
 
