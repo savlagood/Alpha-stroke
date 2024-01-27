@@ -33,3 +33,5 @@ RESOURCES += \
     resources.qrc
 
 RC_FILE = alpha-stroke-gui.rc
+
+QMAKE_CXXFLAGS += -Wa,-mbig-obj

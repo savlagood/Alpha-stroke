@@ -7,14 +7,19 @@
 #include <QVector>
 #include <string>
 
+
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+    class MainWindow;
+}
 QT_END_NAMESPACE
 
 
-class MainWindow : public QMainWindow
-{
+class MainWindow : public QMainWindow {
     Q_OBJECT
+
+protected:
+    void keyPressEvent(QKeyEvent *event);
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -58,4 +63,5 @@ private:
     QVector<double> left_rec_y, right_rec_y, avg_rec_y, trap_y, simp_y, deriv_sour_y, deriv_prim_y;
     QVector<double> *integral_x, *integral_y;
 };
+
 #endif // MAINWINDOW_H

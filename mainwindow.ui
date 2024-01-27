@@ -52,7 +52,7 @@
       <x>10</x>
       <y>100</y>
       <width>291</width>
-      <height>22</height>
+      <height>19</height>
      </rect>
     </property>
     <property name="orientation">
@@ -72,7 +72,7 @@ border-bottom: 1px solid #ef3124;</string>
       <string extracomment="Hello world"/>
      </property>
      <property name="text">
-      <string/>
+      <string>0.1</string>
      </property>
      <property name="frame">
       <bool>false</bool>
@@ -115,6 +115,12 @@ QPushButton:pressed {
     <property name="text">
      <string>Построить график</string>
     </property>
+    <property name="autoDefault">
+     <bool>true</bool>
+    </property>
+    <property name="default">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QSplitter" name="splitter_1">
     <property name="geometry">
@@ -122,7 +128,7 @@ QPushButton:pressed {
       <x>10</x>
       <y>40</y>
       <width>291</width>
-      <height>23</height>
+      <height>19</height>
      </rect>
     </property>
     <property name="orientation">
@@ -155,7 +161,7 @@ border-bottom: 1px solid #ef3124;</string>
       <x>10</x>
       <y>70</y>
       <width>291</width>
-      <height>23</height>
+      <height>19</height>
      </rect>
     </property>
     <property name="orientation">
@@ -175,7 +181,7 @@ border-bottom: 1px solid #ef3124;</string>
       <string extracomment="Hello world"/>
      </property>
      <property name="text">
-      <string/>
+      <string>-10</string>
      </property>
      <property name="frame">
       <bool>false</bool>
@@ -195,7 +201,7 @@ border-bottom: 1px solid #ef3124;</string>
       <string extracomment="Hello world"/>
      </property>
      <property name="text">
-      <string/>
+      <string>10</string>
      </property>
      <property name="frame">
       <bool>false</bool>

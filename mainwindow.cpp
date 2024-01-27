@@ -5,12 +5,20 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QDebug>
 
 #include <fstream>
 #include <filesystem>
 #include <string>
 #include <cmath>
 #include <iostream>
+
+
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+    if (event->key() == Qt::Key_Enter) {
+        qDebug() << "Enter have been pressed";
+    }
+}
 
 
 void MainWindow::rescale_graph(QCustomPlot *graph) {
@@ -46,10 +54,17 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->scale_deriv_source_but, &QPushButton::clicked, this, [=](){ rescale_graph(ui->deriv_source_graph); });
     connect(ui->scale_deriv_primit_but, &QPushButton::clicked, this, [=](){ rescale_graph(ui->deriv_primitive_graph); });
 
+    QShortcut *returnShortcut = new QShortcut(QKeySequence("Return"), ui->gen_dots_but);
+    connect(returnShortcut, SIGNAL(activated()), ui->gen_dots_but, SLOT(click()));
+
     init_graph(ui->source_graph);
     init_graph(ui->primitive_graph);
     init_graph(ui->deriv_source_graph);
     init_graph(ui->deriv_primitive_graph);
+
+    ui->begin->setText("-10");
+    ui->end->setText("10");
+    ui->dist->setText("0.1");
 }
 
 MainWindow::~MainWindow() {
